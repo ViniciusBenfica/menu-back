@@ -1,15 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateOwnerDto } from './dto/create-owner.dto';
 import { UpdateOwnerDto } from './dto/update-owner.dto';
+import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class OwnerService {
-  create(createOwnerDto: CreateOwnerDto) {
-    return 'This action adds a new owner';
+  constructor(private prisma: PrismaService) {}
+  async create(
+    createOwnerDto: CreateOwnerDto,
+  ): Promise<{ message: string; data: CreateOwnerDto }> {
+    const ownerExists = await this.prisma.owner.findUnique({
+      where: { email: createOwnerDto.email },
+    });
+
+    if (ownerExists) {
+      throw new HttpException('Email already exists', HttpStatus.CONFLICT);
+    }
+
+    const newOwner = await this.prisma.owner.create({ data: createOwnerDto });
+    return { message: 'Owner created successfully', data: newOwner };
   }
 
-  findAll() {
-    return `This action returns all owner`;
+  async findAll(): Promise<CreateOwnerDto[]> {
+    return await this.prisma.owner.findMany();
   }
 
   findOne(id: number) {
