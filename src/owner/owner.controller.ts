@@ -17,6 +17,7 @@ export class OwnerController {
 
   @Post()
   create(@Body() createOwnerDto: CreateOwnerDto) {
+    console.log(CreateOwnerDto);
     return this.ownerService.create(createOwnerDto);
   }
 
