@@ -20,4 +20,12 @@ export class OwnerRepository {
   async findAll(): Promise<CreateOwnerDto[]> {
     return await this.prisma.owner.findMany();
   }
+
+  async findOne(id: number): Promise<CreateOwnerDto> {
+    const owner = await this.prisma.owner.findUnique({
+      where: { id },
+    });
+
+    return owner;
+  }
 }

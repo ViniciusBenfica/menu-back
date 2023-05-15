@@ -13,12 +13,19 @@ export class OwnerService {
     return { message: 'Owner created successfully', data: newOwner };
   }
 
-  async findAll(): Promise<CreateOwnerDto[]> {
-    return await this.ownerRepository.findAll();
+  async findAll(): Promise<{ message: string; data: CreateOwnerDto[] }> {
+    const listOwner = await this.ownerRepository.findAll();
+    return { message: 'Return owner list', data: listOwner };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} owner`;
+  async findOne(
+    id: number,
+  ): Promise<{ message: string; data: CreateOwnerDto }> {
+    if (isNaN(id)) {
+      throw new HttpException('Invalid id parameter', HttpStatus.BAD_REQUEST);
+    }
+    const owner = await this.ownerRepository.findOne(id);
+    return { message: 'Return owner', data: owner };
   }
 
   update(id: number, updateOwnerDto: UpdateOwnerDto) {

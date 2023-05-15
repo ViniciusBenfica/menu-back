@@ -16,13 +16,15 @@ export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}
 
   @Post()
-  create(@Body() createOwnerDto: CreateOwnerDto) {
-    return this.ownerService.create(createOwnerDto);
+  async create(
+    @Body() createOwnerDto: CreateOwnerDto,
+  ): Promise<{ message: string; data: CreateOwnerDto }> {
+    return await this.ownerService.create(createOwnerDto);
   }
 
   @Get()
-  findAll() {
-    return this.ownerService.findAll();
+  async findAll(): Promise<{ message: string; data: CreateOwnerDto[] }> {
+    return await this.ownerService.findAll();
   }
 
   @Get(':id')
