@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OwnerController } from './owner.controller';
 import { OwnerService } from './owner.service';
 import { Owner } from './entities/owner.entity';
+import { CreateOwnerDto } from './dto/create-owner.dto';
 
 const ownerList: Owner[] = [
   { id: 1, name: 'teste', email: 'teste@gmail.com', password: '123' },
@@ -41,14 +42,6 @@ describe('OwnerController', () => {
     expect(service).toBeDefined();
   });
 
-  describe('list owner', () => {
-    it('should return a owner list', async () => {
-      const result = await controller.findAll();
-      expect(result).toEqual(ownerList);
-      expect(service.findAll).toHaveBeenCalledTimes(1);
-    });
-  });
-
   describe('create owner', () => {
     it('should create a new owner', async () => {
       const body: Owner = {
@@ -64,9 +57,22 @@ describe('OwnerController', () => {
       expect(service.create).toHaveBeenCalledWith(body);
     });
 
-    it('should thwor an exception', async () => {
+    it('should throw an exception', async () => {
+      const body: CreateOwnerDto = {
+        name: 'teste',
+        email: 'teste@gmail.com',
+        password: '123',
+      };
       jest.spyOn(service, 'create').mockRejectedValueOnce(new Error());
-      expect(controller.create('')).rejects.toThrowError();
+      expect(controller.create(body)).rejects.toThrowError();
+    });
+  });
+
+  describe('list owner', () => {
+    it('should return a owner list', async () => {
+      const result = await controller.findAll();
+      expect(result).toEqual(ownerList);
+      expect(service.findAll).toHaveBeenCalledTimes(1);
     });
   });
 });

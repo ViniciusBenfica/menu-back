@@ -10,6 +10,7 @@ import {
 import { OwnerService } from './owner.service';
 import { CreateOwnerDto } from './dto/create-owner.dto';
 import { UpdateOwnerDto } from './dto/update-owner.dto';
+import { Owner } from './entities/owner.entity';
 
 @Controller('owner')
 export class OwnerController {
@@ -18,18 +19,20 @@ export class OwnerController {
   @Post()
   async create(
     @Body() createOwnerDto: CreateOwnerDto,
-  ): Promise<{ message: string; data: CreateOwnerDto }> {
+  ): Promise<{ message: string; data: Owner }> {
     return await this.ownerService.create(createOwnerDto);
   }
 
   @Get()
-  async findAll(): Promise<{ message: string; data: CreateOwnerDto[] }> {
+  async findAll(): Promise<{ message: string; data: Owner[] }> {
     return await this.ownerService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ownerService.findOne(+id);
+  async findOne(
+    @Param('id') id: string,
+  ): Promise<{ message: string; data: Owner }> {
+    return await this.ownerService.findOne(+id);
   }
 
   @Patch(':id')
