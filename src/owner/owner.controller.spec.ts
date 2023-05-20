@@ -44,8 +44,7 @@ describe('OwnerController', () => {
 
   describe('create owner', () => {
     it('should create a new owner', async () => {
-      const body: Owner = {
-        id: 2,
+      const body: CreateOwnerDto = {
         name: 'teste',
         email: 'teste@gmail.com',
         password: '123',
