@@ -1,12 +1,12 @@
 import {
   IsEmail,
   IsNotEmpty,
-  IsString,
   IsNumber,
+  IsString,
   IsOptional,
 } from 'class-validator';
 
-export class CreateRestaurantDto {
+export class CreateItemDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -15,11 +15,15 @@ export class CreateRestaurantDto {
   @IsNotEmpty()
   description: string;
 
+  @IsNumber()
+  @IsNotEmpty()
+  price: number;
+
   @IsString()
   @IsOptional()
-  logo: string;
+  image: string;
 
   @IsNumber()
   @IsNotEmpty()
-  ownerId: number;
+  restaurantId: number;
 }

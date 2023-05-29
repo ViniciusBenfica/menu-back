@@ -20,7 +20,7 @@ model Owner {
 
 model Restaurant {
   id          Int     @id @default(autoincrement())
-  name        String  
+  name        String
   description String
   logo        String?
   Owner       Owner   @relation(fields: [ownerId], references: [id])
@@ -34,7 +34,7 @@ model Item {
   description  String
   price        Float
   image        String?
-  views        Int        @default(0)
+  views        Int?       @default(0)
   Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
   // category     Category   @relation(fields: [categoryId], references: [id])
