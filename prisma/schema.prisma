@@ -15,4 +15,34 @@ model Owner {
   name        String
   email       String       @unique
   password    String
+  restaurants Restaurant[]
 }
+
+model Restaurant {
+  id          Int     @id @default(autoincrement())
+  name        String  
+  description String
+  logo        String?
+  Owner       Owner   @relation(fields: [ownerId], references: [id])
+  ownerId     Int
+  items       Item[]
+}
+
+model Item {
+  id           Int        @id @default(autoincrement())
+  name         String
+  description  String
+  price        Float
+  image        String?
+  views        Int        @default(0)
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  // category     Category   @relation(fields: [categoryId], references: [id])
+  // categoryId   Int
+}
+
+// model Category {
+//   id    Int    @id @default(autoincrement())
+//   name  String @unique
+//   Items Item[]
+// }
