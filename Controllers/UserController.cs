@@ -9,7 +9,7 @@ namespace menu_back.Controllers
     public class UserController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<List<User>> FindAllUsers()
+        public ActionResult<List<RestaurantOwner>> FindAllUsers()
         {
             return Ok();
         }
