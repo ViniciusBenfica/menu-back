@@ -12,5 +12,10 @@ namespace menu_back.Data
         public DbSet<RestaurantOwner> RestaurantOwner { get; set; }
         public DbSet<Restaurant> Restaurant { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

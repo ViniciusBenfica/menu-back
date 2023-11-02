@@ -6,7 +6,7 @@ namespace menu_back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class RestaurantOwnerController : ControllerBase
     {
         [HttpGet]
         public ActionResult<List<RestaurantOwner>> FindAllUsers()
