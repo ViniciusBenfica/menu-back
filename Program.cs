@@ -1,3 +1,8 @@
+using menu_back.Data;
+using menu_back.Repository;
+using menu_back.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +10,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContext>(
+        options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+    );
+
+builder.Services.AddScoped<IRestaurantOwnerRepository, RestaurantOwnerRepository>();
 
 var app = builder.Build();
 
