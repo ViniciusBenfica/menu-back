@@ -14,6 +14,8 @@ namespace menu_back.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new RestaurantOwnerMap());
+            modelBuilder.ApplyConfiguration(new RestaurantMap());
             base.OnModelCreating(modelBuilder);
         }
 
