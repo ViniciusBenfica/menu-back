@@ -2,15 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace menu_back.Data
+namespace menu_back.Data.map
 {
-    public class RestaurantOwnerMap : IEntityTypeConfiguration<RestaurantOwner>
+    public class RestaurantMap : IEntityTypeConfiguration<Restaurant>
     {
-        public void Configure(EntityTypeBuilder<RestaurantOwner> builder)
+        public void Configure(EntityTypeBuilder<Restaurant> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Email).IsRequired().HasMaxLength(150);
+            builder.HasOne(x => x.RestaurantOwner);
         }
     }
 }
