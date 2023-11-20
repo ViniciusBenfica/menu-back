@@ -50,9 +50,9 @@ namespace menu_back.Repository
         {
             RestaurantOwner findRestaurantOwner = await FindById(id);
 
-            if(findRestaurantOwner == null)
+            if (findRestaurantOwner == null)
             {
-                throw new Exception("User not found");
+                throw new Exception("Restaurant owner not found");
             }
 
             findRestaurantOwner.Name = restaurantOwner.Name;

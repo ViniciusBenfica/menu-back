@@ -15,6 +15,7 @@ builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContext>(
     );
 
 builder.Services.AddScoped<IRestaurantOwnerRepository, RestaurantOwnerRepository>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 
 var app = builder.Build();
 
