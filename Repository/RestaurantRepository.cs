@@ -37,13 +37,13 @@ namespace menu_back.Repository
 
         public async Task<List<Restaurant>> FindAll()
         {
-            return await _dBContext.Restaurant.ToListAsync();
+            return await _dBContext.Restaurant.Include(x => x.RestaurantOwner).ToListAsync();
 
         }
 
         public async Task<Restaurant> FindById(int id)
         {
-            return await _dBContext.Restaurant.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dBContext.Restaurant.Include(x => x.RestaurantOwner).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Restaurant> Update(Restaurant restaurant, int id)
